@@ -1,0 +1,13 @@
+.parent {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.current {
+    margin: auto 5px auto 5px;
+}
+
+.box {
+    margin: auto 5px auto 5px;
+}
