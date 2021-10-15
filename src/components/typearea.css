@@ -1,0 +1,55 @@
+body {
+    height: 100vh;
+}
+
+.whole {
+    display: flex;
+    flex-direction: column;
+}
+
+.configure {
+
+    flex: 1;
+}
+
+.dial {
+
+    margin: 50px auto;
+}
+
+.fetch {
+
+    margin: 0 auto 30px auto;
+}
+
+/* .timer {
+
+} */
+
+.displayText {
+
+    margin: auto;
+    width: 70%;
+    font-size: 25px;
+    max-height: 200px;
+    text-justify: inter-word;
+}
+
+.show {
+    text-justify: inter-word;
+    height: 50px;
+
+}
+
+.typehere {
+    margin: 40px auto;
+    width: 0%;
+}
+
+.inputfield {
+    width: 100%;
+}
+
+.resize {
+    font-size: 30px;
+}
