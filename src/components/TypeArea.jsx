@@ -3,15 +3,15 @@ import randomWords from 'random-words';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
-import Words from './Words.jsx';
+import WordWindow from './WordWindow.jsx';
 import './typearea.css';
 
 export default function TypeArea(){
 
     const [difficulty, changeDiff] = useState(4);
     const [typeWords, updateList] = useState(['']);
-    const [index, changeIndex] = useState(0);
     const [input, checkInput] = useState();
+    const [inColor, changeColor] = useState('#D1E8E4');
 
     var commonWords = randomWords({exactly:500, maxLength: 10 });
     var rareWords = randomWords({exactly: 300, maxLength: 15, minLength: 10});
@@ -80,14 +80,6 @@ export default function TypeArea(){
         updateList(textGenerator());
     }
 
-    // function updateIndex() {
-
-    //     var i = index;
-
-    //     changeIndex(i+1);
-    //     return i;
-    // }
-
     function checker(event) {
 
         var wordBeingTyped = event.target.value;
@@ -95,8 +87,9 @@ export default function TypeArea(){
 
         if(wordBeingTyped === currWord + " ")
         {
-            typeWords.splice(0,1);
+            updateList(typeWords.slice(1,));
             event.target.value = '';
+            changeColor('#D1E8E4');
             return;
         }
 
@@ -107,11 +100,14 @@ export default function TypeArea(){
             if(wordBeingTyped[i] !== currWord[i])
             {
                 console.log("Wrong!");
+                changeColor('#FF0000');
+
             }
 
             else
             {
                 console.log("Correct!");
+                changeColor('#B1E693');
             }
         }
     }
@@ -122,7 +118,7 @@ export default function TypeArea(){
                 <TextField
                 id="outlined-select-difficulty"
                 select
-                label="Select"
+                label="Level"
                 value={difficulty}
                 onChange={handleChange}
                 helperText="Please select desired difficulty"
@@ -145,7 +141,7 @@ export default function TypeArea(){
         </div>
         <div className="displayText">
             <div className="show">
-                {/* {Stuff} */}
+                <WordWindow wordArray = {typeWords}/>
             </div>
         </div>
         <div className="typehere">
@@ -153,7 +149,7 @@ export default function TypeArea(){
                 className="inputfield" 
                 variant="filled"
                 InputProps={{
-                    style: {fontSize: '30px'}
+                    style: {fontSize: '30px', backgroundColor: inColor}
                 }}
 
                 value={input}
