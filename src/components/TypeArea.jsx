@@ -10,7 +10,7 @@ export default function TypeArea(){
 
     const [difficulty, changeDiff] = useState(4);
     const [typeWords, updateList] = useState(['']);
-    const [input, checkInput] = useState();
+    const [input] = useState();
     const [inColor, changeColor] = useState('#D1E8E4');
     const [toCompare, updateCompare] = useState({
         data: '',

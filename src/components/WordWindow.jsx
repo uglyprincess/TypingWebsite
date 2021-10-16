@@ -1,8 +1,6 @@
 import Word from './Word.jsx';
 import './word.css';
 
-//You will receive a single word. Highlight it accordingly. 
-
 export default function Words(props) {
 
     // console.log(props.wordArray);
