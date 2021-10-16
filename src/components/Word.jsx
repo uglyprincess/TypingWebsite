@@ -18,6 +18,7 @@ export default function Word(props) {
         }
 
         var soFar = true;
+        var lastTrueIndex = checkAgainst.length;
 
         for(var i=0;i<checkAgainst.length;i++)
         {
@@ -32,6 +33,7 @@ export default function Word(props) {
                 console.log("Check again!");
                 // newColor('red');
                 soFar = false;
+                lastTrueIndex = Math.min(lastTrueIndex, i);
             }
 
         }
@@ -43,7 +45,7 @@ export default function Word(props) {
                 {checkAgainst}
             </div>
             <div>
-                {actualWord.slice(checkAgainst.length,)}
+                {actualWord.slice(lastTrueIndex,)}
             </div>
         </div>);
 
