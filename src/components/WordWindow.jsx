@@ -1,4 +1,3 @@
-import {React} from 'react';
 import Word from './Word.jsx';
 import './word.css';
 
@@ -6,15 +5,19 @@ import './word.css';
 
 export default function Words(props) {
 
-    console.log(props.wordArray);
+    // console.log(props.wordArray);
 
-    var curr = props.wordArray[0];
+    var index = 0;
 
     var arr = props.wordArray.slice(1, 50);
+    var curr = props.received.data;
+    var userInput = props.received.typed;
+
+    // console.log(userInput);
 
     return <div className='parent'>
-        <Word status={true} value={curr}/>
-        {arr.map((word) => <Word status={false} value={word}/>)}
+        <Word status={true} value={curr} key={index++} user={userInput}/>
+        {arr.map((word) => <Word status={false} value={word} key={index++}/>)}
     </div>;
 
 }

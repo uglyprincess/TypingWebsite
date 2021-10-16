@@ -12,9 +12,13 @@ export default function TypeArea(){
     const [typeWords, updateList] = useState(['']);
     const [input, checkInput] = useState();
     const [inColor, changeColor] = useState('#D1E8E4');
+    const [toCompare, updateCompare] = useState({
+        data: '',
+        typed: ''
+    });
 
     var commonWords = randomWords({exactly:500, maxLength: 10 });
-    var rareWords = randomWords({exactly: 300, maxLength: 15, minLength: 10});
+    var rareWords = randomWords({exactly:500, maxLength: 15});
 
     const settings = [
         {
@@ -72,7 +76,13 @@ export default function TypeArea(){
         start = (Math.floor(Math.random()* 100));
         newArray = newArray.concat(rareWords.slice(start, start + freq*100));
 
-        return(shuffle(newArray));
+        newArray = shuffle(newArray);
+        updateCompare({
+            data: newArray[0],
+            typed: ''
+        });
+
+        return(newArray);
     }
 
     function fetchText() {
@@ -85,28 +95,39 @@ export default function TypeArea(){
         var wordBeingTyped = event.target.value;
         var currWord = typeWords[0];
 
+        updateCompare({
+            data: currWord,
+            typed: wordBeingTyped
+        });
+
+        // console.log(wordBeingTyped, currWord);
+
         if(wordBeingTyped === currWord + " ")
         {
+            updateCompare({
+                data: typeWords[1],
+                typed: ''
+            });
+            
             updateList(typeWords.slice(1,));
             event.target.value = '';
+
             changeColor('#D1E8E4');
             return;
         }
 
         for(var i=0;i<wordBeingTyped.length;i++)
         {
-            console.log(wordBeingTyped, currWord);
-
             if(wordBeingTyped[i] !== currWord[i])
             {
-                console.log("Wrong!");
+                // console.log("Wrong!");
                 changeColor('#FF0000');
 
             }
 
             else
             {
-                console.log("Correct!");
+                // console.log("Correct!");
                 changeColor('#B1E693');
             }
         }
@@ -141,7 +162,7 @@ export default function TypeArea(){
         </div>
         <div className="displayText">
             <div className="show">
-                <WordWindow wordArray = {typeWords}/>
+                <WordWindow wordArray={typeWords} received={toCompare}/>
             </div>
         </div>
         <div className="typehere">
