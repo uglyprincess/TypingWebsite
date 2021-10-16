@@ -9,7 +9,12 @@ export default function Word(props) {
 
         if(checkAgainst === undefined)
             return <div className='current'>
-                    {actualWord}
+                    <div style={{color: 'black'}}>
+                        |
+                    </div>
+                    <div>
+                        {actualWord}
+                    </div>
                 </div>;
 
         if(checkAgainst === actualWord + " ")
@@ -43,6 +48,9 @@ export default function Word(props) {
         return(<div className='current'>
             <div style={{color: textColor}}>
                 {checkAgainst}
+            </div>
+            <div style={{color: 'black'}}>
+                |
             </div>
             <div>
                 {actualWord.slice(lastTrueIndex,)}

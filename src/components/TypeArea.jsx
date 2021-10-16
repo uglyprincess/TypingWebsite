@@ -1,4 +1,4 @@
-import {React, useState} from "react";
+import {React, useState, useRef} from "react";
 import randomWords from 'random-words';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -16,6 +16,8 @@ export default function TypeArea(){
         data: '',
         typed: ''
     });
+
+    const inputRef = useRef();
 
     var commonWords = randomWords({exactly:500, maxLength: 10 });
     var rareWords = randomWords({exactly:500, maxLength: 15});
@@ -88,6 +90,14 @@ export default function TypeArea(){
     function fetchText() {
 
         updateList(textGenerator());
+        focus();
+    }
+
+    function focus() {
+
+        console.log(inputRef.current);
+        inputRef.current.focus();
+
     }
 
     function checker(event) {
@@ -169,6 +179,7 @@ export default function TypeArea(){
             <TextField 
                 className="inputfield" 
                 variant="filled"
+                inputRef={inputRef}
                 InputProps={{
                     style: {fontSize: '30px', backgroundColor: inColor}
                 }}

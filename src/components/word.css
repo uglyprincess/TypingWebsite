@@ -7,8 +7,10 @@
 .current {
     margin: auto 5px auto 5px;
     display: flex;
+    letter-spacing: 2px;
 }
 
 .box {
     margin: auto 5px auto 5px;
+    letter-spacing: 2px;
 }
