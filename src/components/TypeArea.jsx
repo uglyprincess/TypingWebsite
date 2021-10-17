@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import WordWindow from './WordWindow.jsx';
+import Timer from './Timer.jsx';
 import './typearea.css';
 
 export default function TypeArea(){
@@ -16,6 +17,8 @@ export default function TypeArea(){
         data: '',
         typed: ''
     });
+
+    const [go, rego] = useState(false);
 
     const inputRef = useRef();
 
@@ -91,6 +94,7 @@ export default function TypeArea(){
 
         updateList(textGenerator());
         focus();
+        rego(true);
     }
 
     function focus() {
@@ -167,7 +171,7 @@ export default function TypeArea(){
                 </Button>
             </div>
             <div className="timer">
-                {/* Timer! */}
+                <Timer limit="61" start={go}/>
             </div>
         </div>
         <div className="displayText">

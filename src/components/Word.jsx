@@ -49,7 +49,7 @@ export default function Word(props) {
             <div style={{color: textColor}}>
                 {checkAgainst}
             </div>
-            <div style={{color: 'black'}}>
+            <div className="virtual_cursor">
                 |
             </div>
             <div>

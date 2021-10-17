@@ -10,6 +10,11 @@
     letter-spacing: 2px;
 }
 
+.virtual_cursor {
+    color: black;
+    margin: auto 0px;
+}
+
 .box {
     margin: auto 5px auto 5px;
     letter-spacing: 2px;
