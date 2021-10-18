@@ -1,0 +1,11 @@
+.result_card {
+    display: flex;
+}
+
+.speed {
+    font-family:'IBM Plex Mono', monospace;
+    margin: 10% auto;
+    background-color: blueviolet;
+    padding: 40px 100px;
+    border-radius: 5%;
+}

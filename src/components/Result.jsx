@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react';
+import './result.css';
 
 export default function ResultCard(props) {
 
@@ -11,7 +12,9 @@ export default function ResultCard(props) {
         
     }, [props.words, props.time]);
 
-    return (<div>
-        <h1>Your speed is {speed} WPM!</h1>
+    return (<div className="result_card">
+        <div className="speed">
+            <h1>Your speed is {speed} WPM!</h1>
+        </div>
     </div>);
 }
