@@ -38,9 +38,30 @@ body {
     text-align: left;
 }
 
-.fetch {
+.button_field {
 
     margin: 0 auto 30px auto;
+    display: flex;
+}
+
+.button_one {
+    flex: 1;
+    text-align: end;
+    margin-right: 20px;
+}
+
+.button_two {
+    flex: 1;
+    text-align: start;
+    margin-left: 20px;
+}
+
+.fetch_button {
+    width: 20%;
+}
+
+.start_button {
+    width: 20%;
 }
 
 .timer {

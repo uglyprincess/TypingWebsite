@@ -10,13 +10,22 @@ export default function Timer(props) {
     }
 
     useEffect(() => {
-        
-        id.current = setInterval(() => {
-            ticktock((time) => time-1);
-        }, 1000);
+        ticktock(props.limit);
+    }, [props.limit]);
+
+    useEffect(() => {
+
+        if(props.started)
+        {
+            id.current = setInterval(() => {
+                ticktock((time) => time-1);
+            }, 1000);
+        }
+        else
+            ticktock(props.limit);
 
         return () => clear();
-    }, []);
+    }, [props.started]);
 
     useEffect(() => {
         if(time===0)
@@ -24,10 +33,18 @@ export default function Timer(props) {
     }, [time]);
 
     function hasStarted() {
+
+        console.log(props.started, time, props.limit);
+
         if(!props.started)
             return "Press 'Fetch Text' to start!";
-        else
+        else if(time!==0)
             return time;
+        else
+        {
+            props.parentCallback();
+            return "Time up!";
+        }
     }
 
     return (<div>

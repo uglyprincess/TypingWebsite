@@ -93,8 +93,13 @@ export default function TypeArea(){
     function fetchText() {
 
         updateList(textGenerator());
-        restart(true);
+        restart(false);
+        console.log(time);
+    }
+
+    function startTimer() {
         focus();
+        restart(true);
     }
 
     function focus() {
@@ -104,17 +109,18 @@ export default function TypeArea(){
 
     }
 
-    function flush() {
+    function changeTimeLimit(event) {
+        updateTime(event.target.value);
+    }
+
+    function timeUp() {
 
         updateList([]);
         updateCompare({
             data: "",
             typed: ""
         });
-    }
-
-    function changeTimeLimit(event) {
-        updateTime(event.target.value);
+        restart(false);
     }
 
     function checker(event) {
@@ -174,20 +180,28 @@ export default function TypeArea(){
                         label="Time"
                         onChange={changeTimeLimit}
                     >
+                        <MenuItem value={1}>1 second</MenuItem>
                         <MenuItem value={30}>30 seconds</MenuItem>
                         <MenuItem value={60}>60 seconds</MenuItem>
                         <MenuItem value={120}>120 seconds</MenuItem>
                     </Select>
                 </div>
             </div>
-            <div className="fetch">
-                <Button variant="contained" onClick={fetchText} className="bigbutton">
-                    Fetch Text!
-                </Button>
+            <div className="button_field">
+                <div className="button_one">
+                    <Button variant="contained" onClick={fetchText} className="fetch_button">
+                        Fetch Text!
+                    </Button>
+                </div>
+                <div className="button_two">
+                    <Button variant="contained" onClick={startTimer} className="start_button">
+                        Start
+                    </Button>
+                </div>
             </div>
 
             <div className="timer">
-                <Timer limit={time} started={start}/>
+                <Timer limit={time} started={start} parentCallback={timeUp}/>
             </div>
         </div>
         <div className="displayText">
