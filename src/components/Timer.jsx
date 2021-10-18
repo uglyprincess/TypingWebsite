@@ -1,34 +1,36 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function Timer(props) {
 
-    const [time, tickTime] = useState(props.limit);
+    const [time, ticktock] = useState(props.limit); 
+    const id = useRef(null);
+
+    function clear() {
+        clearInterval(id.current);
+    }
 
     useEffect(() => {
         
-        const timerWindow = time>0 && setInterval(() => {
-            tickTime(time => time-1);
+        id.current = setInterval(() => {
+            ticktock((time) => time-1);
         }, 1000);
-    
-        //This function takes in one variable, the ID of the setInterval function, and clears it.
-        //Here, we are storing that ID in the constant 'timerWindow'.
 
-        return () => {
-            clearInterval(timerWindow);
-        }
+        return () => clear();
+    }, []);
 
-    },[time]);
+    useEffect(() => {
+        if(time===0)
+            clear();
+    }, [time]);
 
-    function timeOrNot () {
-
-        if(!props.start)
-            return "Press 'Fetch Text' to start the timer!";
+    function hasStarted() {
+        if(!props.started)
+            return "Press 'Fetch Text' to start!";
         else
             return time;
     }
 
     return (<div>
-        {timeOrNot()}
+        {hasStarted()}
     </div>);
-
 }

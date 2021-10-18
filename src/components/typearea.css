@@ -12,9 +12,30 @@ body {
     flex: 1;
 }
 
-.dial {
+.settings {
+    display: flex;
+    justify-content: space-between;
+}
+
+.settings_diff {
 
     margin: 50px auto;
+    flex: 1;
+}
+
+.settings_time {
+    flex: 1;
+    margin: 50px auto;
+}
+
+.time_label {
+    margin: 10px auto;
+
+}
+
+.time_select {
+    width: 200px;
+    text-align: left;
 }
 
 .fetch {
@@ -22,9 +43,12 @@ body {
     margin: 0 auto 30px auto;
 }
 
-/* .timer {
+.timer {
 
-} */
+    margin: 50px auto;
+    font-size: 30px;
+
+}
 
 .displayText {
 

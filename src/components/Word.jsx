@@ -10,7 +10,7 @@ export default function Word(props) {
         if(checkAgainst === undefined)
             return <div className='current'>
                     <div style={{color: 'black'}}>
-                        |
+                        │
                     </div>
                     <div>
                         {actualWord}

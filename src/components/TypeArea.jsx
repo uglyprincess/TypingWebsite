@@ -4,6 +4,8 @@ import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import WordWindow from './WordWindow.jsx';
+import Select from '@material-ui/core/Select';
+import InputLabel from "@material-ui/core/InputLabel";
 import Timer from './Timer.jsx';
 import './typearea.css';
 
@@ -18,9 +20,9 @@ export default function TypeArea(){
         typed: ''
     });
 
-    const [go, rego] = useState(false);
-
     const inputRef = useRef();
+    const [time, updateTime] = useState(60);
+    const [start, restart] = useState(false);
 
     var commonWords = randomWords({exactly:500, maxLength: 10 });
     var rareWords = randomWords({exactly:500, maxLength: 15});
@@ -74,8 +76,6 @@ export default function TypeArea(){
         let freq = difficulty;
         let start = (Math.floor(Math.random() * 100));
         newArray = commonWords.slice(start, start + freq*100);
-        // console.log(commonWords);
-        // console.log(typeWords);
 
         freq = 5 - difficulty;
         start = (Math.floor(Math.random()* 100));
@@ -93,15 +93,28 @@ export default function TypeArea(){
     function fetchText() {
 
         updateList(textGenerator());
+        restart(true);
         focus();
-        rego(true);
     }
 
     function focus() {
 
-        console.log(inputRef.current);
+        // console.log(inputRef.current);
         inputRef.current.focus();
 
+    }
+
+    function flush() {
+
+        updateList([]);
+        updateCompare({
+            data: "",
+            typed: ""
+        });
+    }
+
+    function changeTimeLimit(event) {
+        updateTime(event.target.value);
     }
 
     function checker(event) {
@@ -130,48 +143,51 @@ export default function TypeArea(){
             return;
         }
 
-        for(var i=0;i<wordBeingTyped.length;i++)
-        {
-            if(wordBeingTyped[i] !== currWord[i])
-            {
-                // console.log("Wrong!");
-                changeColor('#FF0000');
-
-            }
-
-            else
-            {
-                // console.log("Correct!");
-                changeColor('#B1E693');
-            }
-        }
     }
 
     return(<div className="whole">
         <div className="configure">
-            <div className="dial">
-                <TextField
-                id="outlined-select-difficulty"
-                select
-                label="Level"
-                value={difficulty}
-                onChange={handleChange}
-                helperText="Please select desired difficulty"
-                >
-                {settings.map((setting) => (
-                    <MenuItem key={setting.value} value={setting.value}>
-                    {setting.label}
-                    </MenuItem>
-                ))}
-                </TextField>
+            <div className="settings">
+                <div className="settings_diff">
+                    <TextField
+                    id="outlined-select-difficulty"
+                    select
+                    label="Level"
+                    value={difficulty}
+                    onChange={handleChange}
+                    helperText="Please select desired difficulty"
+                    >
+                    {settings.map((setting) => (
+                        <MenuItem key={setting.value} value={setting.value}>
+                        {setting.label}
+                        </MenuItem>
+                    ))}
+                    </TextField>
+                </div>
+                <div className="settings_time">
+                    <InputLabel id="select-time-limit" className="time_label">Time Limit</InputLabel>
+                    <Select
+                        labelId="simple-select-label"
+                        id="simple-select"
+                        className="time_select"
+                        value={time}
+                        label="Time"
+                        onChange={changeTimeLimit}
+                    >
+                        <MenuItem value={30}>30 seconds</MenuItem>
+                        <MenuItem value={60}>60 seconds</MenuItem>
+                        <MenuItem value={120}>120 seconds</MenuItem>
+                    </Select>
+                </div>
             </div>
             <div className="fetch">
                 <Button variant="contained" onClick={fetchText} className="bigbutton">
                     Fetch Text!
                 </Button>
             </div>
+
             <div className="timer">
-                <Timer limit="61" start={go}/>
+                <Timer limit={time} started={start}/>
             </div>
         </div>
         <div className="displayText">
