@@ -37,7 +37,7 @@ export default function Timer(props) {
         console.log(props.started, time, props.limit);
 
         if(!props.started)
-            return "Press 'Fetch Text' to start!";
+            return "Press 'Start'!";
         else if(time!==0)
             return time;
         else

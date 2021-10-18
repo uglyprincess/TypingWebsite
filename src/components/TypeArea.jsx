@@ -7,6 +7,7 @@ import WordWindow from './WordWindow.jsx';
 import Select from '@material-ui/core/Select';
 import InputLabel from "@material-ui/core/InputLabel";
 import Timer from './Timer.jsx';
+import Result from './Result.jsx';
 import './typearea.css';
 
 export default function TypeArea(){
@@ -23,6 +24,8 @@ export default function TypeArea(){
     const inputRef = useRef();
     const [time, updateTime] = useState(60);
     const [start, restart] = useState(false);
+    const [totalWords, updateWPM] = useState(0);
+    const [finished, checkFinish] = useState(false);
 
     var commonWords = randomWords({exactly:500, maxLength: 10 });
     var rareWords = randomWords({exactly:500, maxLength: 15});
@@ -121,6 +124,7 @@ export default function TypeArea(){
             typed: ""
         });
         restart(false);
+        checkFinish(true);
     }
 
     function checker(event) {
@@ -141,6 +145,8 @@ export default function TypeArea(){
                 data: typeWords[1],
                 typed: ''
             });
+
+            updateWPM((wordsSoFar) => wordsSoFar+1);
             
             updateList(typeWords.slice(1,));
             event.target.value = '';
@@ -152,7 +158,7 @@ export default function TypeArea(){
     }
 
     return(<div className="whole">
-        <div className="configure">
+        <div className="configure" style={{display: finished && "none"}}>
             <div className="settings">
                 <div className="settings_diff">
                     <TextField
@@ -199,17 +205,16 @@ export default function TypeArea(){
                     </Button>
                 </div>
             </div>
-
-            <div className="timer">
+            <div className="timer" >
                 <Timer limit={time} started={start} parentCallback={timeUp}/>
             </div>
         </div>
-        <div className="displayText">
+        <div className="displayText" style={{display: finished && "none"}}>
             <div className="show">
                 <WordWindow wordArray={typeWords} received={toCompare}/>
             </div>
         </div>
-        <div className="typehere">
+        <div className="typehere" style={{display: finished && "none"}}>
             <TextField 
                 className="inputfield" 
                 variant="filled"
@@ -221,6 +226,9 @@ export default function TypeArea(){
                 value={input}
                 onChange={checker}
             />
+        </div>
+        <div className="output" style={{display: !finished && "none"}}>
+            <Result words={totalWords} time={time}/>
         </div>
     </div>);
       
