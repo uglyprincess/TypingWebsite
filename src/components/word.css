@@ -5,9 +5,9 @@
 }
 
 .current {
-    margin: auto 9px auto 9px;
+    margin: auto 12px auto 12px;
     display: flex;
-    letter-spacing: 3px;
+    letter-spacing: 4px;
 }
 
 .virtual_cursor {
@@ -48,6 +48,6 @@
 }
 
 .box {
-    margin: auto 9px auto 9px;
-    letter-spacing: 3px;
+    margin: auto 12px auto 12px;
+    letter-spacing: 5px;
 }

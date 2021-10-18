@@ -1,3 +1,8 @@
+:root {
+    --custom-width: clamp(40%, 200px, 80%);
+    --button-width: clamp(80px,150px,175px);
+}
+
 body {
     height: 100vh;
 }
@@ -15,31 +20,44 @@ body {
 .settings {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .settings_diff {
 
     margin: 50px auto;
     flex: 1;
+    width: var(--custom-width);
 }
 
 .settings_time {
     flex: 1;
     margin: 50px auto;
+    width: var(--custom-width);
+
+}
+
+.difficulty_label {
+    margin: 0 auto 10px auto;
+
+}
+
+.diff_select {
+    width: var(--custom-width);
+    text-align: left;
 }
 
 .time_label {
-    margin: 10px auto;
+    margin: 0 auto 10px auto;
 
 }
 
 .time_select {
-    width: 200px;
+    width: var(--custom-width);
     text-align: left;
 }
 
 .button_field {
-
     margin: 0 auto 30px auto;
     display: flex;
 }
@@ -57,18 +75,17 @@ body {
 }
 
 .fetch_button {
-    width: 20%;
+    width: var(--button-width);
 }
 
 .start_button {
-    width: 20%;
+    width: var(--button-width);
 }
 
 .timer {
-
+    font-family: 'Work Sans', sans-serif;
     margin: 50px auto;
     font-size: 30px;
-
 }
 
 .displayText {
@@ -79,6 +96,8 @@ body {
     font-size: 25px;
     max-height: 200px;
     text-justify: inter-word;
+    font-family: 'Noto Sans Mono',  monospace;
+    font-weight: bold;
 }
 
 .show {

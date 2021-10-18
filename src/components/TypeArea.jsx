@@ -22,6 +22,8 @@ export default function TypeArea(){
     });
 
     const inputRef = useRef();
+    const scrollRef = useRef(null);
+
     const [time, updateTime] = useState(60);
     const [start, restart] = useState(false);
     const [totalWords, updateWPM] = useState(0);
@@ -102,6 +104,7 @@ export default function TypeArea(){
 
     function startTimer() {
         focus();
+        executeScroll();
         restart(true);
     }
 
@@ -110,6 +113,10 @@ export default function TypeArea(){
         // console.log(inputRef.current);
         inputRef.current.focus();
 
+    }
+
+    function executeScroll() {
+        scrollRef.current.scrollIntoView();
     }
 
     function changeTimeLimit(event) {
@@ -161,13 +168,13 @@ export default function TypeArea(){
         <div className="configure" style={{display: finished && "none"}}>
             <div className="settings">
                 <div className="settings_diff">
+                <InputLabel id="select-difficulty" className="difficulty_label">Difficulty</InputLabel>
                     <TextField
                     id="outlined-select-difficulty"
                     select
-                    label="Level"
+                    className="diff_select"
                     value={difficulty}
                     onChange={handleChange}
-                    helperText="Please select desired difficulty"
                     >
                     {settings.map((setting) => (
                         <MenuItem key={setting.value} value={setting.value}>
@@ -177,13 +184,12 @@ export default function TypeArea(){
                     </TextField>
                 </div>
                 <div className="settings_time">
-                    <InputLabel id="select-time-limit" className="time_label">Time Limit</InputLabel>
+                    <InputLabel id="select-time-limit" className="time_label">Time</InputLabel>
                     <Select
                         labelId="simple-select-label"
                         id="simple-select"
                         className="time_select"
                         value={time}
-                        label="Time"
                         onChange={changeTimeLimit}
                     >
                         <MenuItem value={1}>1 second</MenuItem>
@@ -195,17 +201,17 @@ export default function TypeArea(){
             </div>
             <div className="button_field">
                 <div className="button_one">
-                    <Button variant="contained" onClick={fetchText} className="fetch_button">
-                        Fetch Text!
+                    <Button variant="contained" style={{ backgroundColor: "#3D2C8D"}} color="primary" onClick={fetchText} className="fetch_button">
+                        Fetch Text
                     </Button>
                 </div>
                 <div className="button_two">
-                    <Button variant="contained" onClick={startTimer} className="start_button">
+                    <Button variant="contained" style={{ backgroundColor: "#1C7947"}} color="primary" onClick={startTimer} className="start_button">
                         Start
                     </Button>
                 </div>
             </div>
-            <div className="timer" >
+            <div className="timer" ref={scrollRef}>
                 <Timer limit={time} started={start} parentCallback={timeUp}/>
             </div>
         </div>
