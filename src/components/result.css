@@ -8,4 +8,31 @@
     background-color: blueviolet;
     padding: 40px 100px;
     border-radius: 5%;
+    color: white;
+}
+
+.button_plate {
+    background-color: hsl(144, 62%, 70%);
+    height: 100px;
+    width: clamp(60px, 100px, 140px);
+    margin: 30px auto;
+    display: flex;
+    border-radius: 15%;
+    box-shadow: 8px 8px 1px hsl(144, 62%, 30%);
+    transition-duration: 0.5s;
+    color: black;
+}
+
+.button_plate:hover {
+    background-color: hsl(144, 62%, 60%);
+    box-shadow: 3px 3px 1px hsl(144, 70%, 30%);
+    color: rgb(239, 240, 236);
+}
+
+.replay {
+
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    font-size: clamp(30px,70px,100px);
 }

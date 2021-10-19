@@ -134,6 +134,10 @@ export default function TypeArea(){
         checkFinish(true);
     }
 
+    function tryAgain() {
+        checkFinish(false);
+    }
+
     function checker(event) {
 
         var wordBeingTyped = event.target.value;
@@ -234,7 +238,7 @@ export default function TypeArea(){
             />
         </div>
         <div className="output" style={{display: !finished && "none"}}>
-            <Result words={totalWords} time={time}/>
+            <Result words={totalWords} time={time} parentCallback={tryAgain}/>
         </div>
     </div>);
       

@@ -27,6 +27,8 @@ export default function Word(props) {
 
         for(var i=0;i<checkAgainst.length;i++)
         {
+            console.log(checkAgainst, actualWord);
+            
             if(checkAgainst[i] === actualWord[i])
             {
                 console.log("Going right!");
@@ -39,15 +41,21 @@ export default function Word(props) {
                 // newColor('red');
                 soFar = false;
                 lastTrueIndex = Math.min(lastTrueIndex, i);
+                break;
             }
 
         }
 
-        var textColor = (soFar) ? 'green' : 'red';
+        var textUnderline = (!soFar) ? 'underline' : 'none';
+        var incorrect = checkAgainst.slice(lastTrueIndex, checkAgainst.length);
+        checkAgainst = checkAgainst.slice(0,lastTrueIndex);
 
         return(<div className='current'>
-            <div style={{color: textColor}}>
+            <div style={{color: 'green', textDecoration: textUnderline}}>
                 {checkAgainst}
+            </div>
+            <div style={{color: 'red', textDecoration: 'line-through'}}>
+                {incorrect}
             </div>
             <div className="virtual_cursor">
                 |
